@@ -1,19 +1,17 @@
 name: Posts management
 
 on:
-  issues:
-    type: [opened]
+  [issues]
 
 jobs:
   close-unauthorized-issues:
     runs-on: ubuntu-latest
     steps:
       - name: close unauthorized issues
-        if: github.event.user.login == github.repository_owner
+        if: github.repository_owner == 'SalHe'
         uses: actions-cool/issues-helper@v2.0.0
         with:
           actions: 'create-comment'
-          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
             Test condition!
