@@ -1,18 +1,18 @@
 name: Posts management
 
 on:
-  [issues]
+  issues:
+    type: [opened]
 
 jobs:
   close-unauthorized-issues:
     runs-on: ubuntu-latest
     steps:
       - name: close unauthorized issues
-        if: github.repository_owner == 'SalHe'
+        if: github.repository_owner == github.event.issue.user.login # TEST
         uses: actions-cool/issues-helper@v2.0.0
         with:
-          actions: 'create-comment'
+          actions: 'close-issues'
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Test condition!
-      - run: echo ${{ github.event.issue.user.login }}
+            You're not allowed open issue in this repository. Please contact owner to be guaranteed.
