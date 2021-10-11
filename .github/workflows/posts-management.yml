@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: close unauthorized issues
-        if: github.repository_owner == github.event.issue.user.login # TEST
+        if: github.repository_owner != github.event.issue.user.login
         uses: actions-cool/issues-helper@v2.0.0
         with:
           actions: 'close-issues'
